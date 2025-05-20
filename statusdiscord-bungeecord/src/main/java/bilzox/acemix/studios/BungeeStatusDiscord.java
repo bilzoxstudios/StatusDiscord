@@ -22,8 +22,10 @@ public class BungeeStatusDiscord extends Plugin {
 
     @Override
     public void onEnable() {
-        instance = this;
+        int pluginId = 25923;
+        Metrics metrics = new Metrics(this, pluginId);
 
+        instance = this;
         Configuration config = loadConfig();
         discordManager = new DiscordManager(config);
         discordManager.startBot();
