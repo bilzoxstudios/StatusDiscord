@@ -1,0 +1,17 @@
+modules:
+  token: 'TOKEN-YOUR-BOT'
+  guild: 'ID-YOUR-GUILD'
+  nameserver: 'Minecraft Server'
+
+discord:
+  status:
+    channel: 'ID-CHANNEL-VOICE-STATUS'
+    type:
+      onenable: 'Status: ON'
+      ondisable: 'Status: OFF'
+
+  players:
+    channel: 'ID-CHANNEL-VOICE-PLAYERS'
+    type:
+      onenable: 'Players: {online}/{max}'
+      ondisable: 'Players: X/X'

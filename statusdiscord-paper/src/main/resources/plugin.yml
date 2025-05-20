@@ -1,0 +1,5 @@
+name: StatusDiscord
+main: bilzox.acemix.studios.PaperStatusDiscord
+version: 1.0
+api-version: 1.13
+author: Acemix
