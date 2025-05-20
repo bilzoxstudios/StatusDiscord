@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/StatusDiscord.iml" filepath="$PROJECT_DIR$/StatusDiscord.iml" />
       <module fileurl="file://$PROJECT_DIR$/statusdiscord-bungeecord/statusdiscord-bungeecord.iml" filepath="$PROJECT_DIR$/statusdiscord-bungeecord/statusdiscord-bungeecord.iml" />
+      <module fileurl="file://$PROJECT_DIR$/statusdiscord-paper/statusdiscord-paper.iml" filepath="$PROJECT_DIR$/statusdiscord-paper/statusdiscord-paper.iml" />
       <module fileurl="file://$PROJECT_DIR$/statusdiscord-spigot/statusdiscord-spigot.iml" filepath="$PROJECT_DIR$/statusdiscord-spigot/statusdiscord-spigot.iml" />
       <module fileurl="file://$PROJECT_DIR$/statusdiscord-velocity/statusdiscord-velocity.iml" filepath="$PROJECT_DIR$/statusdiscord-velocity/statusdiscord-velocity.iml" />
     </modules>
