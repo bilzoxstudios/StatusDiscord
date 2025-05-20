@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 
 /**
@@ -31,14 +32,55 @@ public class DiscordManager {
     }
 
     public void startBot() {
+        if (!isValidConfig()) {
+            logConfigError();
+            return;
+        }
+
+        if (!isTokenValid(token)) {
+            Bukkit.getConsoleSender().sendMessage("[StatusDiscord] ERROR: The token format is invalid. Please check your config.");
+            return;
+        }
+
         try {
             jda = JDABuilder.createDefault(token)
                     .setActivity(Activity.playing(nameServer))
                     .build()
                     .awaitReady();
+            Bukkit.getConsoleSender().sendMessage("[StatusDiscord] Bot connected successfully to Discord.");
         } catch (Exception e) {
-            e.printStackTrace();
+            Bukkit.getConsoleSender().sendMessage("[StatusDiscord] Failed to start the Discord bot:");
+            Bukkit.getConsoleSender().sendMessage(e.getClass().getSimpleName() + ": " + e.getMessage());
         }
+    }
+
+    private boolean isValidConfig() {
+        return token != null && !token.isEmpty()
+                && guildId != null && !guildId.isEmpty()
+                && nameServer != null && !nameServer.isEmpty()
+                && statusChannelId != null && !statusChannelId.isEmpty()
+                && playersChannelId != null && !playersChannelId.isEmpty()
+                && statusOn != null && statusOff != null
+                && playersOn != null && playersOff != null;
+    }
+
+    private boolean isTokenValid(String token) {
+        return token != null && token.split("\\.").length == 3;
+    }
+
+    private void logConfigError() {
+        Bukkit.getConsoleSender().sendMessage("===================================================");
+        Bukkit.getConsoleSender().sendMessage("[StatusDiscord] CONFIGURATION ERROR");
+        Bukkit.getConsoleSender().sendMessage("Missing or invalid config entries:");
+        if (token == null || token.isEmpty()) Bukkit.getConsoleSender().sendMessage(" - modules.token is missing");
+        if (guildId == null || guildId.isEmpty()) Bukkit.getConsoleSender().sendMessage(" - modules.guild is missing");
+        if (nameServer == null || nameServer.isEmpty()) Bukkit.getConsoleSender().sendMessage(" - modules.nameserver is missing");
+        if (statusChannelId == null || statusChannelId.isEmpty()) Bukkit.getConsoleSender().sendMessage(" - discord.status.channel is missing");
+        if (playersChannelId == null || playersChannelId.isEmpty()) Bukkit.getConsoleSender().sendMessage(" - discord.players.channel is missing");
+        if (statusOn == null || statusOff == null) Bukkit.getConsoleSender().sendMessage(" - discord.status.type.onenable/ondisable are missing");
+        if (playersOn == null || playersOff == null) Bukkit.getConsoleSender().sendMessage(" - discord.players.type.onenable/ondisable are missing");
+        Bukkit.getConsoleSender().sendMessage("Bot will not start until config is fixed.");
+        Bukkit.getConsoleSender().sendMessage("===================================================");
     }
 
     public void updateStatus(boolean enabled) {
@@ -55,7 +97,7 @@ public class DiscordManager {
     private void updateChannelName(String channelId, String name) {
         if (jda == null) return;
         Guild guild = jda.getGuildById(guildId);
-        if (guild == null) return;
+        if (guild == null || guild.getVoiceChannelById(channelId) == null) return;
         guild.getVoiceChannelById(channelId).getManager().setName(name).queue();
     }
 

@@ -19,6 +19,7 @@
 
     <modules>
         <module>statusdiscord-spigot</module>
+        <module>statusdiscord-paper</module>
         <module>statusdiscord-bungeecord</module>
         <module>statusdiscord-velocity</module>
     </modules>

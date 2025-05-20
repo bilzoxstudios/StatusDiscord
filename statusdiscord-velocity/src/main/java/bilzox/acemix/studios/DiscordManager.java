@@ -33,12 +33,29 @@ public class DiscordManager {
     }
 
     public void startBot() {
+        if (!isValidConfig()) {
+            logConfigError();
+            return;
+        }
+
+        if (!isTokenValid(token)) {
+            System.out.println("§c========================================");
+            System.out.println("§c        [StatusDiscord] INVALID TOKEN  ");
+            System.out.println("§c  The token provided is not valid.     ");
+            System.out.println("§c  Please check your config.            ");
+            System.out.println("§cBot will not attempt to connect.       ");
+            System.out.println("§c========================================");
+            return;
+        }
+
         try {
             jda = JDABuilder.createDefault(token)
                     .setActivity(Activity.playing(nameserver))
                     .build()
                     .awaitReady();
+            System.out.println("§a[StatusDiscord] Bot successfully connected.");
         } catch (Exception e) {
+            System.out.println("§c[StatusDiscord] Unexpected error while starting the bot:");
             e.printStackTrace();
         }
     }
@@ -63,5 +80,28 @@ public class DiscordManager {
 
     public void shutdown() {
         if (jda != null) jda.shutdownNow();
+    }
+
+    private boolean isValidConfig() {
+        return token != null && !token.isEmpty()
+                && guildId != null && !guildId.isEmpty()
+                && statusChannelId != null && !statusChannelId.isEmpty()
+                && playersChannelId != null && !playersChannelId.isEmpty()
+                && nameserver != null && !nameserver.isEmpty()
+                && statusOn != null && statusOff != null
+                && playersOn != null && playersOff != null;
+    }
+
+    private void logConfigError() {
+        System.out.println("§c========================================");
+        System.out.println("§c      [StatusDiscord] CONFIG ERROR     ");
+        System.out.println("§c One or more configuration fields are  ");
+        System.out.println("§c missing or empty in the config file.  ");
+        System.out.println("§c Please review your config settings.   ");
+        System.out.println("§c========================================");
+    }
+
+    private boolean isTokenValid(String token) {
+        return token != null && token.split("\\.").length == 3;
     }
 }
