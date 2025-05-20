@@ -20,18 +20,23 @@ public class VelocityStatusDiscord {
     private final Logger logger;
     private final ProxyServer server;
     private final Path dataDirectory;
+    private final Metrics.Factory metricsFactory;
 
     private DiscordManager discordManager;
 
     @Inject
-    public VelocityStatusDiscord(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory) {
+    public VelocityStatusDiscord(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory, Metrics.Factory metricsFactory) {
         this.server = server;
         this.logger = logger;
         this.dataDirectory = dataDirectory;
+        this.metricsFactory = metricsFactory;
     }
 
     @Subscribe
     public void onProxyInitialize(ProxyInitializeEvent event) {
+        int pluginId = 25924;
+        Metrics metrics = metricsFactory.make(this, pluginId);
+
         Path configPath = dataDirectory.resolve("config.properties");
         Properties config = loadConfig(configPath);
 
