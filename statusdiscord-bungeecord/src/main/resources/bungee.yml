@@ -1,0 +1,4 @@
+name: StatusDiscord
+version: 1.0
+main: bilzox.acemix.studios.BungeeStatusDiscord
+author: Acemix
