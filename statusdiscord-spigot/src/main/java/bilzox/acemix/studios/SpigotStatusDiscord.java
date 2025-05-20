@@ -15,6 +15,9 @@ public class SpigotStatusDiscord extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        int pluginId = 25922;
+        Metrics metrics = new Metrics(this, pluginId);
+
         instance = this;
         saveDefaultConfig();
         discordManager = new DiscordManager(getConfig());
