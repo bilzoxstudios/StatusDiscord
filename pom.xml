@@ -7,7 +7,7 @@
 
     <groupId>bilzox.acemix.studios</groupId>
     <artifactId>StatusDiscord</artifactId>
-    <version>1.0</version>
+    <version>2.0</version>
     <packaging>pom</packaging>
 
     <name>StatusDiscord</name>
