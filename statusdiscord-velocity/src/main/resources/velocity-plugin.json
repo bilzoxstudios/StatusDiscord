@@ -1,7 +1,7 @@
 {
   "id": "statusdiscord",
   "name": "StatusDiscord",
-  "version": "1.0",
+  "version": "2.0",
   "main": "bilzox.acemix.studios.VelocityStatusDiscord",
   "authors": ["Acemix"]
 }
