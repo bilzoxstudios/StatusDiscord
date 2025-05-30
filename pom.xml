@@ -21,6 +21,7 @@
         <module>statusdiscord-spigot</module>
         <module>statusdiscord-paper</module>
         <module>statusdiscord-bungeecord</module>
+        <module>statusdiscord-waterfall</module>
         <module>statusdiscord-velocity</module>
     </modules>
 
@@ -65,27 +66,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
-    <repositories>
-        <repository>
-            <id>spigotmc-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
-            <id>sonatype</id>
-            <url>https://oss.sonatype.org/content/groups/public/</url>
-        </repository>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
-
-    <dependencies>
-        <dependency>
-            <groupId>net.dv8tion</groupId>
-            <artifactId>JDA</artifactId>
-            <version>5.0.0-beta.20</version>
-        </dependency>
-    </dependencies>
 </project>

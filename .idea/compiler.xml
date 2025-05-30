@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="statusdiscord-spigot" />
+        <module name="statusdiscord-waterfall" />
         <module name="statusdiscord-paper" />
         <module name="statusdiscord-bungeecord" />
         <module name="statusdiscord-velocity" />
